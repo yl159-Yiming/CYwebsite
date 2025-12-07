@@ -28,7 +28,7 @@
               <!-- TODO: replace src with your own headshot -->
               <img
                   class="profile-photo"
-                  src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?auto=format&fit=crop&w=600&q=80"
+                  src="@/assets/person.jpeg"
                   alt="Profile headshot placeholder"
               />
             </div>
