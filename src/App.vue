@@ -4,7 +4,7 @@
     <header class="top-nav">
       <div class="top-nav__inner">
         <div class="top-nav__brand">
-          <a href="#about" class="brand-name">Yiming Li</a>
+          <a href="#about" class="brand-name">Tapi Tu</a>
         </div>
         <nav class="top-nav__links">
           <a href="#about">Home</a>
@@ -33,7 +33,7 @@
               />
             </div>
             <div class="about-name-block">
-              <h1 class="about-name">Yiming Li</h1>
+              <h1 class="about-name">Tapi Tu</h1>
               <p class="about-title">Quantitative Researcher in Energy Markets</p>
               <p class="about-affiliation">Your Institution / Company</p>
             </div>
@@ -84,7 +84,7 @@
           <h3 class="paper-title">
             Placeholder Title for Job Market Paper on Power Market Analytics
           </h3>
-          <p class="paper-meta">Yiming Li. (Data analysis in progress.)</p>
+          <p class="paper-meta">Tapi Tu. (Data analysis in progress.)</p>
           <p>
             This is a placeholder abstract. Here you can describe the key
             question, contribution, and methods of your job market paper or a
@@ -112,7 +112,7 @@
             <a href="https://google.com">Placeholder Publication on Congestion Measurement</a>
           </h3>
           <p class="paper-entry__meta">
-            Yiming Li. Journal / Conference Name, Volume / Year (forthcoming).
+            Tapi Tu. Journal / Conference Name, Volume / Year (forthcoming).
           </p>
           <p class="paper-entry__note">
             Short optional note or one-sentence summary of the paper.
@@ -124,7 +124,7 @@
             <a href="https://google.com">Another Placeholder Publication Title</a>
           </h3>
           <p class="paper-entry__meta">
-            Yiming Li and Coauthors. Outlet name, year.
+            Tapi Tu and Coauthors. Outlet name, year.
           </p>
         </article>
       </section>
@@ -158,7 +158,7 @@
           <h3 class="paper-entry__title">
             <a href="https://google.com">Using Historical Congestion to Design Hedging Strategies</a>
           </h3>
-          <p class="paper-entry__meta">Yiming Li.</p>
+          <p class="paper-entry__meta">Tapi Tu.</p>
           <p class="paper-entry__update">Last updated on &lt;date&gt;.</p>
         </article>
       </section>
