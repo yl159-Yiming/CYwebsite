@@ -197,6 +197,7 @@
           Markdown directory or another system.
         </p>
       </section>
+
       <!-- Rabbit Section -->
       <section id="rabbit" class="section">
         <h2 class="section-heading">My Rabbit</h2>
@@ -205,29 +206,78 @@
         </p>
 
         <div class="rabbit-gallery">
+          <!-- Oval -->
           <div class="rabbit-item">
             <img
                 src="@/assets/rabbit_oval.png"
                 alt="Rabbit 1"
             />
             <p class="rabbit-caption">Oval</p>
+            <button
+                class="rabbit-choice-button"
+                :class="{ selected: selectedShape === 'oval' }"
+                @click="selectShape('oval')"
+            >
+              Choose this shape
+            </button>
           </div>
 
+          <!-- Hexagon -->
           <div class="rabbit-item">
             <img
                 src="@/assets/rabbit_hexagon.png"
                 alt="Rabbit 2"
             />
             <p class="rabbit-caption">Hexagon</p>
+            <button
+                class="rabbit-choice-button"
+                :class="{ selected: selectedShape === 'hexagon' }"
+                @click="selectShape('hexagon')"
+            >
+              Choose this shape
+            </button>
           </div>
 
+          <!-- Rectangle -->
           <div class="rabbit-item">
             <img
                 src="@/assets/rabbit_rectangle.png"
                 alt="Rabbit 3"
             />
             <p class="rabbit-caption">Rectangle</p>
+            <button
+                class="rabbit-choice-button"
+                :class="{ selected: selectedShape === 'rectangle' }"
+                @click="selectShape('rectangle')"
+            >
+              Choose this shape
+            </button>
           </div>
+        </div>
+
+        <!-- Submit + message -->
+        <div class="rabbit-actions">
+          <button
+              class="rabbit-submit-button"
+              :disabled="!selectedShape"
+              @click="submitVote"
+          >
+            Submit vote
+          </button>
+          <p v-if="message" class="rabbit-message">
+            {{ message }}
+          </p>
+        </div>
+
+        <!-- Previous / accumulated results -->
+        <div class="rabbit-results" v-if="showResults && totalVotes > 0">
+          <h3>Previous votes</h3>
+          <ul>
+            <li>Oval: {{ votes.oval }}</li>
+            <li>Hexagon: {{ votes.hexagon }}</li>
+            <li>Rectangle: {{ votes.rectangle }}</li>
+            <li>Total votes: {{ totalVotes }}</li>
+          </ul>
         </div>
       </section>
 
@@ -236,7 +286,81 @@
 </template>
 
 <script setup>
-// No Vue logic needed yet; this is a mostly static page.
+import { ref, computed, onMounted, watch } from 'vue'
+
+const STORAGE_KEY = 'rabbit-votes-v1'
+
+const selectedShape = ref(null) // 'oval' | 'hexagon' | 'rectangle' | null
+
+// vote counts are kept and persisted in localStorage
+const votes = ref({
+  oval: 0,
+  hexagon: 0,
+  rectangle: 0,
+})
+
+const message = ref('')
+// controls whether the results block is visible in the current session
+const showResults = ref(false)
+
+// Load previous votes from localStorage on mount
+onMounted(() => {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY)
+    if (raw) {
+      const parsed = JSON.parse(raw)
+      if (
+          parsed &&
+          typeof parsed === 'object' &&
+          ['oval', 'hexagon', 'rectangle'].every(k => typeof parsed[k] === 'number')
+      ) {
+        votes.value = parsed
+      }
+    }
+  } catch (e) {
+    console.error('Failed to load rabbit votes from localStorage', e)
+  }
+})
+
+// Persist votes whenever they change
+watch(
+    votes,
+    (newVal) => {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(newVal))
+      } catch (e) {
+        console.error('Failed to save rabbit votes to localStorage', e)
+      }
+    },
+    { deep: true }
+)
+
+const totalVotes = computed(() =>
+    votes.value.oval + votes.value.hexagon + votes.value.rectangle
+)
+
+function selectShape(shape) {
+  selectedShape.value = shape
+  message.value = '' // clear any old message
+}
+
+function submitVote() {
+  if (!selectedShape.value) {
+    message.value = 'Please choose a rabbit shape first.'
+    return
+  }
+
+  votes.value[selectedShape.value] += 1
+
+  const labelMap = {
+    oval: 'Oval',
+    hexagon: 'Hexagon',
+    rectangle: 'Rectangle',
+  }
+
+  message.value = `You voted for ${labelMap[selectedShape.value]}!`
+  showResults.value = true
+}
 </script>
 
 <style scoped>
@@ -536,6 +660,7 @@
     height: 190px;
   }
 }
+
 .rabbit-photo-wrap {
   margin-top: 1.2rem;
   display: flex;
@@ -576,6 +701,64 @@
   .rabbit-gallery {
     grid-template-columns: 1fr;
   }
+}
+
+.rabbit-choice-button {
+  display: block;
+  margin: 0.6rem auto 0;
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid #d1d5db;
+  background: #f9fafb;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.rabbit-choice-button.selected {
+  border-color: #1f4f7b;
+  background: #e0ecff;
+  font-weight: 600;
+}
+
+.rabbit-choice-button:hover {
+  background: #edf2ff;
+}
+
+.rabbit-actions {
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.rabbit-submit-button {
+  padding: 0.45rem 1.1rem;
+  border-radius: 999px;
+  border: none;
+  background: #1f4f7b;
+  color: #ffffff;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.rabbit-submit-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.rabbit-message {
+  font-size: 0.9rem;
+  color: #374151;
+}
+
+.rabbit-results {
+  margin-top: 1.2rem;
+  font-size: 0.9rem;
+}
+
+.rabbit-results ul {
+  margin: 0.4rem 0 0;
+  padding-left: 1.2rem;
 }
 
 </style>
