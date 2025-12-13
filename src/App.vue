@@ -11,7 +11,7 @@
           <a href="#cv">CV</a>
           <a href="#working-papers">Working Papers</a>
           <a href="#work-in-progress">Work in Progress</a>
-          <a href="#nutorc-research">NUTORC Research</a>
+          <a href="#collaborative-research">Collaborative Research</a>
           <a href="#blog">Blog</a>
         </nav>
       </div>
@@ -28,7 +28,7 @@
               <!-- TODO: replace src with your own headshot -->
               <img
                   class="profile-photo"
-                  src="@/assets/person.jpeg"
+                  src="@/assets/rabbit_profile.png"
                   alt="Profile headshot placeholder"
               />
             </div>
@@ -163,12 +163,11 @@
         </article>
       </section>
 
-      <!-- NUTORC-style Research section (collaborative projects) -->
-      <section id="nutorc-research" class="section">
+      <!-- collaborative projects -->
+      <section id="collaborative-research" class="section">
         <h2 class="section-heading">Collaborative / Applied Research</h2>
         <p>
-          This section can be used for applied or collaborative projects, similar
-          to the "NUTORC Research" section on the reference site. You can briefly
+          This section can be used for applied or collaborative projects. You can briefly
           describe the collaboration and then list specific studies.
         </p>
 
