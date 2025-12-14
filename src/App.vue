@@ -8,11 +8,10 @@
         </div>
         <nav class="top-nav__links">
           <a href="#about">Home</a>
-          <a href="#cv">CV</a>
           <a href="#working-papers">Working Papers</a>
-          <a href="#work-in-progress">Work in Progress</a>
-          <a href="#collaborative-research">Collaborative Research</a>
-          <a href="#blog">Blog</a>
+<!--          <a href="#work-in-progress">Work in Progress</a>-->
+<!--          <a href="#collaborative-research">Collaborative Research</a>-->
+<!--          <a href="#rabbit">Others</a>-->
         </nav>
       </div>
     </header>
