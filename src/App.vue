@@ -103,30 +103,30 @@
       </section>
 
       <!-- Publications section -->
-      <section id="publications" class="section">
-        <h2 class="section-heading">Publications</h2>
+<!--      <section id="publications" class="section">-->
+<!--        <h2 class="section-heading">Publications</h2>-->
 
-        <article class="paper-entry">
-          <h3 class="paper-entry__title">
-            <a href="https://google.com">Placeholder Publication on Congestion Measurement</a>
-          </h3>
-          <p class="paper-entry__meta">
-            Tapi Tu. Journal / Conference Name, Volume / Year (forthcoming).
-          </p>
-          <p class="paper-entry__note">
-            Short optional note or one-sentence summary of the paper.
-          </p>
-        </article>
+<!--        <article class="paper-entry">-->
+<!--          <h3 class="paper-entry__title">-->
+<!--            <a href="https://google.com">Placeholder Publication on Congestion Measurement</a>-->
+<!--          </h3>-->
+<!--          <p class="paper-entry__meta">-->
+<!--            Tapi Tu. Journal / Conference Name, Volume / Year (forthcoming).-->
+<!--          </p>-->
+<!--          <p class="paper-entry__note">-->
+<!--            Short optional note or one-sentence summary of the paper.-->
+<!--          </p>-->
+<!--        </article>-->
 
-        <article class="paper-entry">
-          <h3 class="paper-entry__title">
-            <a href="https://google.com">Another Placeholder Publication Title</a>
-          </h3>
-          <p class="paper-entry__meta">
-            Tapi Tu and Coauthors. Outlet name, year.
-          </p>
-        </article>
-      </section>
+<!--        <article class="paper-entry">-->
+<!--          <h3 class="paper-entry__title">-->
+<!--            <a href="https://google.com">Another Placeholder Publication Title</a>-->
+<!--          </h3>-->
+<!--          <p class="paper-entry__meta">-->
+<!--            Tapi Tu and Coauthors. Outlet name, year.-->
+<!--          </p>-->
+<!--        </article>-->
+<!--      </section>-->
 
       <!-- Working Papers section -->
       <section id="working-papers" class="section">
@@ -163,28 +163,28 @@
       </section>
 
       <!-- collaborative projects -->
-      <section id="collaborative-research" class="section">
-        <h2 class="section-heading">Collaborative / Applied Research</h2>
-        <p>
-          This section can be used for applied or collaborative projects. You can briefly
-          describe the collaboration and then list specific studies.
-        </p>
+<!--      <section id="collaborative-research" class="section">-->
+<!--        <h2 class="section-heading">Collaborative / Applied Research</h2>-->
+<!--        <p>-->
+<!--          This section can be used for applied or collaborative projects. You can briefly-->
+<!--          describe the collaboration and then list specific studies.-->
+<!--        </p>-->
 
-        <article class="paper-entry">
-          <h3 class="paper-entry__title">
-            <a href="https://google.com">Placeholder Collaborative Project 1</a>
-          </h3>
-          <p class="paper-entry__meta">First author (Forthcoming in &lt;Journal&gt;).</p>
-          <p class="paper-entry__update">Last updated on &lt;date&gt;.</p>
-        </article>
+<!--        <article class="paper-entry">-->
+<!--          <h3 class="paper-entry__title">-->
+<!--            <a href="https://google.com">Placeholder Collaborative Project 1</a>-->
+<!--          </h3>-->
+<!--          <p class="paper-entry__meta">First author (Forthcoming in &lt;Journal&gt;).</p>-->
+<!--          <p class="paper-entry__update">Last updated on &lt;date&gt;.</p>-->
+<!--        </article>-->
 
-        <article class="paper-entry">
-          <h3 class="paper-entry__title">
-            <a href="https://google.com">Placeholder Collaborative Project 2</a>
-          </h3>
-          <p class="paper-entry__update">Last updated on &lt;date&gt;.</p>
-        </article>
-      </section>
+<!--        <article class="paper-entry">-->
+<!--          <h3 class="paper-entry__title">-->
+<!--            <a href="https://google.com">Placeholder Collaborative Project 2</a>-->
+<!--          </h3>-->
+<!--          <p class="paper-entry__update">Last updated on &lt;date&gt;.</p>-->
+<!--        </article>-->
+<!--      </section>-->
 
       <!-- Simple blog placeholder -->
       <section id="blog" class="section">
