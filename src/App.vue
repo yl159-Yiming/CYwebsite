@@ -150,17 +150,17 @@
       </section>
 
       <!-- Work in Progress section -->
-      <section id="work-in-progress" class="section">
-        <h2 class="section-heading">Work in Progress</h2>
+<!--      <section id="work-in-progress" class="section">-->
+<!--        <h2 class="section-heading">Work in Progress</h2>-->
 
-        <article class="paper-entry">
-          <h3 class="paper-entry__title">
-            <a href="https://google.com">Using Historical Congestion to Design Hedging Strategies</a>
-          </h3>
-          <p class="paper-entry__meta">Tapi Tu.</p>
-          <p class="paper-entry__update">Last updated on &lt;date&gt;.</p>
-        </article>
-      </section>
+<!--        <article class="paper-entry">-->
+<!--          <h3 class="paper-entry__title">-->
+<!--            <a href="https://google.com">Using Historical Congestion to Design Hedging Strategies</a>-->
+<!--          </h3>-->
+<!--          <p class="paper-entry__meta">Tapi Tu.</p>-->
+<!--          <p class="paper-entry__update">Last updated on &lt;date&gt;.</p>-->
+<!--        </article>-->
+<!--      </section>-->
 
       <!-- collaborative projects -->
 <!--      <section id="collaborative-research" class="section">-->
