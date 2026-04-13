@@ -196,6 +196,15 @@
         </p>
       </section>
 
+      <!-- Visitors section -->
+      <section id="visitors" class="section">
+        <h2 class="section-heading">Visitors</h2>
+        <div class="visitors-widgets">
+          <div id="clustrmaps-container"></div>
+          <div id="clstr-globe-container"></div>
+        </div>
+      </section>
+
       <!-- Rabbit Section -->
       <section id="rabbit" class="section">
         <h2 class="section-heading">My Rabbit</h2>
@@ -310,7 +319,21 @@ async function fetchVotes() {
   }
 }
 
-onMounted(fetchVotes)
+onMounted(() => {
+  fetchVotes()
+
+  const mapScript = document.createElement('script')
+  mapScript.type = 'text/javascript'
+  mapScript.id = 'clustrmaps'
+  mapScript.src = '//clustrmaps.com/map_v2.js?d=bT_tAPetY_RshkA8QMbQeGEXIquM1b37cLwu7OUVq_A&cl=ffffff&w=a'
+  document.getElementById('clustrmaps-container').appendChild(mapScript)
+
+  const globeScript = document.createElement('script')
+  globeScript.type = 'text/javascript'
+  globeScript.id = 'clstr_globe'
+  globeScript.src = '//clustrmaps.com/globe.js?d=bT_tAPetY_RshkA8QMbQeGEXIquM1b37cLwu7OUVq_A'
+  document.getElementById('clstr-globe-container').appendChild(globeScript)
+})
 
 const totalVotes = computed(() =>
     votes.value.oval + votes.value.hexagon + votes.value.rectangle
@@ -753,6 +776,25 @@ async function submitVote() {
 .rabbit-results ul {
   margin: 0.4rem 0 0;
   padding-left: 1.2rem;
+}
+
+.visitors-widgets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: flex-start;
+  margin-top: 1rem;
+}
+
+#clustrmaps-container {
+  flex: 1;
+  min-width: 300px;
+  min-height: 200px;
+}
+
+#clstr-globe-container {
+  min-width: 200px;
+  min-height: 200px;
 }
 
 </style>
