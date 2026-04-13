@@ -257,10 +257,10 @@
         <div class="rabbit-actions">
           <button
               class="rabbit-submit-button"
-              :disabled="!selectedShape"
+              :disabled="!selectedShape || submitting"
               @click="submitVote"
           >
-            Submit vote
+            {{ submitting ? 'Submitting…' : 'Submit vote' }}
           </button>
           <p v-if="message" class="rabbit-message">
             {{ message }}
@@ -284,54 +284,33 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, watch } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 
-const STORAGE_KEY = 'rabbit-votes-v1'
+const GIST_ID = import.meta.env.VITE_GIST_ID
+const GIST_TOKEN = import.meta.env.VITE_GIST_TOKEN
+const GIST_FILENAME = 'rabbit_shape.json'
 
 const selectedShape = ref(null) // 'oval' | 'hexagon' | 'rectangle' | null
-
-// vote counts are kept and persisted in localStorage
-const votes = ref({
-  oval: 0,
-  hexagon: 0,
-  rectangle: 0,
-})
-
+const votes = ref({ oval: 0, hexagon: 0, rectangle: 0 })
 const message = ref('')
-// controls whether the results block is visible in the current session
 const showResults = ref(false)
+const submitting = ref(false)
 
-// Load previous votes from localStorage on mount
-onMounted(() => {
+const labelMap = { oval: 'Oval', hexagon: 'Hexagon', rectangle: 'Rectangle' }
+
+async function fetchVotes() {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY)
-    if (raw) {
-      const parsed = JSON.parse(raw)
-      if (
-          parsed &&
-          typeof parsed === 'object' &&
-          ['oval', 'hexagon', 'rectangle'].every(k => typeof parsed[k] === 'number')
-      ) {
-        votes.value = parsed
-      }
-    }
+    const res = await fetch(`https://api.github.com/gists/${GIST_ID}`, {
+      headers: { Authorization: `Bearer ${GIST_TOKEN}` },
+    })
+    const data = await res.json()
+    votes.value = JSON.parse(data.files[GIST_FILENAME].content)
   } catch (e) {
-    console.error('Failed to load rabbit votes from localStorage', e)
+    console.error('Failed to load votes from Gist', e)
   }
-})
+}
 
-// Persist votes whenever they change
-watch(
-    votes,
-    (newVal) => {
-      try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(newVal))
-      } catch (e) {
-        console.error('Failed to save rabbit votes to localStorage', e)
-      }
-    },
-    { deep: true }
-)
+onMounted(fetchVotes)
 
 const totalVotes = computed(() =>
     votes.value.oval + votes.value.hexagon + votes.value.rectangle
@@ -339,25 +318,42 @@ const totalVotes = computed(() =>
 
 function selectShape(shape) {
   selectedShape.value = shape
-  message.value = '' // clear any old message
+  message.value = ''
 }
 
-function submitVote() {
-  if (!selectedShape.value) {
-    message.value = 'Please choose a rabbit shape first.'
-    return
+async function submitVote() {
+  if (!selectedShape.value || submitting.value) return
+
+  submitting.value = true
+  try {
+    // Read fresh counts first to avoid overwriting a concurrent vote
+    const res = await fetch(`https://api.github.com/gists/${GIST_ID}`, {
+      headers: { Authorization: `Bearer ${GIST_TOKEN}` },
+    })
+    const data = await res.json()
+    const current = JSON.parse(data.files[GIST_FILENAME].content)
+    const updated = { ...current, [selectedShape.value]: current[selectedShape.value] + 1 }
+
+    await fetch(`https://api.github.com/gists/${GIST_ID}`, {
+      method: 'PATCH',
+      headers: {
+        Authorization: `Bearer ${GIST_TOKEN}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        files: { [GIST_FILENAME]: { content: JSON.stringify(updated) } },
+      }),
+    })
+
+    votes.value = updated
+    message.value = `You voted for ${labelMap[selectedShape.value]}!`
+    showResults.value = true
+  } catch (e) {
+    console.error('Failed to submit vote', e)
+    message.value = 'Something went wrong. Please try again.'
+  } finally {
+    submitting.value = false
   }
-
-  votes.value[selectedShape.value] += 1
-
-  const labelMap = {
-    oval: 'Oval',
-    hexagon: 'Hexagon',
-    rectangle: 'Rectangle',
-  }
-
-  message.value = `You voted for ${labelMap[selectedShape.value]}!`
-  showResults.value = true
 }
 </script>
 
